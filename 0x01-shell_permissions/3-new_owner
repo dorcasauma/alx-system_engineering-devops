@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chown betty /path/to/hello 2>/dev/null || sudo touch /path/to/hello && sudo chown betty /path/to/hello
+chown hello:betty 

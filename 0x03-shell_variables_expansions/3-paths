@@ -1,2 +1,2 @@
 #!/bin/bash
-(IFS=':'; set -- $PATH; echo $#)
+echo $PATH | tr ':' '\n' | grep "^/" | wc -l

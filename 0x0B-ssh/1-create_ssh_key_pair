@@ -1,3 +1,15 @@
 #!/usr/bin/env bash
 # Create RSA key pair with specified parameters
-ssh-keygen -t rsa -b 4096 -N "betty" -f ~/.ssh/school
+
+# Define the filename for the private key
+private_key_file="school"
+
+# Create RSA key pair with specified parameters
+ssh-keygen -t rsa -b 4096 -N "betty" -f ~/.ssh/"$private_key_file"
+
+# Check if the private key file exists after creation
+if [[ -f ~/.ssh/"$private_key_file" ]]; then
+    echo "$private_key_file: OpenSSH private key"
+else
+    echo "Failed to create the private key file"
+fi

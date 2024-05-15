@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# This script calculates the total disk usage of a specified directory.
 service nginx stop
 sed -i 's/user\s*nginx;/user nginx nginx;/g' /etc/nginx/nginx.conf
 service nginx start

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 service nginx stop
 sed -i 's/user\s*nginx;/user nginx nginx;/g' /etc/nginx/nginx.conf
 service nginx start

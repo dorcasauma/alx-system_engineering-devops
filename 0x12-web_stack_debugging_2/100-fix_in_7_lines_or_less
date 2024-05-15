@@ -1,7 +1,9 @@
-#!/bin/bash
-
-service nginx stop
-sed -i 's/user\s*nginx;/user nginx nginx;/g' /etc/nginx/nginx.conf
-service nginx start
-ps auxff | grep ngin[x]
-nc -z 0 8080
+#!/usr/bin/env bash
+# Short and sweet
+apt-get update
+apt-get install nginx -y
+sed -i 's/user\s*nginx;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen\s*80;/listen 8080;/g' /etc/nginx/sites-available/default
+service nginx restart
+pgrep -u nginx &>/dev/null && echo "Nginx is running as nginx user" || echo "Failed to run Nginx as nginx user"
+netstat -tuln | grep ':8080' >/dev/null && echo "Nginx is listening on port 8080" || echo "Nginx is not listening on port 8080"

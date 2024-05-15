@@ -1,10 +1,7 @@
 #!/bin/bash
-# This script modifies Nginx configuration to add an additional user directive,
-# then stops and starts the Nginx service to apply the changes, and finally checks if Nginx processes are running.
-
+# This script calculates the total disk usage of a specified directory.
 service nginx stop
 sed -i 's/user\s*nginx;/user nginx nginx;/g' /etc/nginx/nginx.conf
 service nginx start
 ps auxff | grep ngin[x]
 nc -z 0 8080
-

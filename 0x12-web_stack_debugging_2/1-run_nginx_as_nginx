@@ -1,4 +1,6 @@
 #!/bin/bash
+# This Bash script configures the container to run Nginx as the nginx user,
+# listening on all active IPs on port 8080.
 
 # Stop nginx service
 service nginx stop

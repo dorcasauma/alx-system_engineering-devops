@@ -23,7 +23,8 @@ def export_to_json(user_id, username, tasks):
         None
     """
     data = {str(user_id): [{"task": task.get('title'),
-                            "completed": task.get('completed'), "username": username} for task in tasks]}
+                            "completed": task.get('completed'),
+                            "username": username} for task in tasks]}
     filename = f"{user_id}.json"
     with open(filename, 'w') as json_file:
         json.dump(data, json_file, indent=2)

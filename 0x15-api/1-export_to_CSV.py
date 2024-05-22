@@ -30,13 +30,6 @@ def export_to_csv(user_id, username, tasks):
                       'TASK_COMPLETED_STATUS', 'TASK_TITLE']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for task in tasks:
-            writer.writerow({
-                'USER_ID': user_id,
-                'USERNAME': username,
-                'TASK_COMPLETED_STATUS': task.get('completed'),
-                'TASK_TITLE': task.get('title')
-            })
 
 
 def fetch_tasks(user_id):
@@ -60,6 +53,5 @@ if __name__ == "__main__":
     user_id = int(sys.argv[1])
     tasks = fetch_tasks(user_id)
     if tasks:
-        # Assuming the username is the same for all tasks
         username = tasks[0].get('username')
         export_to_csv(user_id, username, tasks)

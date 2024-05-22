@@ -8,8 +8,9 @@ and exports the data to a CSV file.
 
 
 import csv
-import sys
 import requests
+import sys
+
 
 
 def export_to_csv(user_id, username, tasks):

@@ -54,4 +54,3 @@ if __name__ == "__main__":
     tasks_by_user = fetch_all_tasks()
     if tasks_by_user:
         export_to_json(tasks_by_user)
-

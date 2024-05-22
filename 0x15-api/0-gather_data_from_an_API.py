@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 This script uses the REST API from JSONPlaceholder to fetch and display
 the TODO list progress of a given employee ID.
@@ -9,6 +10,7 @@ import sys
 
 
 def get_user_data(employee_id):
+
     """
     Fetches the name of the employee with the given ID from the API.
 
@@ -23,6 +25,7 @@ def get_user_data(employee_id):
     response.raise_for_status()
     user_data = response.json()
     return user_data
+
 
 def get_todo_list(employee_id):
     """
@@ -40,6 +43,7 @@ def get_todo_list(employee_id):
     todo_list = response.json()
     return todo_list
 
+
 def completed_tasks(todo_list):
     """
     Counts the number of completed tasks in the TODO list.
@@ -53,8 +57,9 @@ def completed_tasks(todo_list):
     done_tasks = 0
     for task in todo_list:
         if task['completed']:
-            done_tasks+=1
+            done_tasks +=1
     return done_tasks
+
 
 if __name__ == "__main__":
     employeeId = int(sys.argv[1])
@@ -63,7 +68,8 @@ if __name__ == "__main__":
     todo_list = get_todo_list(employeeId)
     total_tasks = len(todo_list)
     done_tasks = completed_tasks(todo_list)
-    print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
+    print(f"Employee {employee_name} is done with tasks("
+        f"{done_tasks}/{total_tasks}):")
     for task in todo_list:
         if task['completed']:
             print(f"\t {task['title']}")

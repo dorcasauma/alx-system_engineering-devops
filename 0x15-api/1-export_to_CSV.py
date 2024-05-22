@@ -6,6 +6,7 @@ This script fetches tasks for a specified user ID from the JSONPlaceholder API
 and exports the data to a CSV file.
 """
 
+
 import csv
 import sys
 import requests
@@ -27,7 +28,6 @@ def export_to_csv(user_id, username, tasks):
     with open(filename, 'w', newline='') as csvfile:
         fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
         writer.writeheader()
         for task in tasks:
             writer.writerow({
@@ -55,8 +55,10 @@ def fetch_tasks(user_id):
 
 
 if __name__ == "__main__":
+
     user_id = int(sys.argv[1])
     tasks = fetch_tasks(user_id)
     if tasks:
-        username = tasks[0].get('username')  # Assuming the username is the same for all tasks
+        # Assuming the username is the same for all tasks
+        username = tasks[0].get('username')
         export_to_csv(user_id, username, tasks)

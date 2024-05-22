@@ -9,6 +9,7 @@ import json
 import sys
 import requests
 
+
 def export_to_json(user_id, username, tasks):
     """
     Export tasks data to a JSON file.
@@ -21,10 +22,12 @@ def export_to_json(user_id, username, tasks):
     Returns:
         None
     """
-    data = {str(user_id): [{"task": task.get('title'), "completed": task.get('completed'), "username": username} for task in tasks]}
+    data = {str(user_id): [{"task": task.get('title'),
+                            "completed": task.get('completed'), "username": username} for task in tasks]}
     filename = f"{user_id}.json"
     with open(filename, 'w') as json_file:
         json.dump(data, json_file, indent=2)
+
 
 def fetch_tasks(user_id):
     """
@@ -40,6 +43,7 @@ def fetch_tasks(user_id):
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
+
 
 if __name__ == "__main__":
     user_id = int(sys.argv[1])

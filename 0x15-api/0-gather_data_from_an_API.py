@@ -7,6 +7,7 @@ the TODO list progress of a given employee ID.
 import requests
 import sys
 
+
 def get_user_data(employee_id):
     """
     Fetches the name of the employee with the given ID from the API.

@@ -7,7 +7,7 @@ the TODO list progress of a given employee ID.
 import requests
 import sys
 
-def get_employee_name(employee_id):
+def get_user_data(employee_id):
     """
     Fetches the name of the employee with the given ID from the API.
 
@@ -21,7 +21,7 @@ def get_employee_name(employee_id):
     response = requests.get(url)
     response.raise_for_status()
     user_data = response.json()
-    return user_data['name']
+    return user_data
 
 def get_todo_list(employee_id):
     """
@@ -36,38 +36,33 @@ def get_todo_list(employee_id):
     url = f"https://jsonplaceholder.typicode.com/todos"
     response = requests.get(url, params={'userId': employee_id})
     response.raise_for_status()
-    return response.json()
+    todo_list = response.json()
+    return todo_list
 
-def main(employee_id):
+def completed_tasks(todo_list):
     """
-    Main function to fetch and print the TODO list progress of an employee.
+    Counts the number of completed tasks in the TODO list.
 
     Args:
-        employee_id (int): The ID of the employee.
+        todo_list (list): The list of TODO items.
+
+    Returns:
+        int: The number of completed tasks.
     """
-    try:
-        employee_name = get_employee_name(employee_id)
-        todo_list = get_todo_list(employee_id)
-
-        total_tasks = len(todo_list)
-        done_tasks = [task for task in todo_list if task['completed']]
-        number_of_done_tasks = len(done_tasks)
-
-        print(f"Employee {employee_name} is done with tasks({number_of_done_tasks}/{total_tasks}):")
-        for task in done_tasks:
-            print(f"\t {task['title']}")
-
-    except requests.RequestException as e:
-        print(f"Error fetching data: {e}")
-    except ValueError:
-        print("Invalid employee ID")
+    done_tasks = 0
+    for task in todo_list:
+        if task['completed']:
+            done_tasks+=1
+    return done_tasks
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
-    else:
-        try:
-            employee_id = int(sys.argv[1])
-            main(employee_id)
-        except ValueError:
-            print("Employee ID must be an integer")
+    employeeId = sys.argv[1]
+    user_data = get_user_data(employeeId)
+    employee_name = user_data["name"]
+    todo_list = get_todo_list(employeeId)
+    total_tasks = len(todo_list)
+    done_tasks = completed_tasks(todo_list)
+    print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
+    for task in todo_list:
+        if task['completed']:
+            print(f"\t {task['title']}")

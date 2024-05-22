@@ -57,7 +57,7 @@ def completed_tasks(todo_list):
     return done_tasks
 
 if __name__ == "__main__":
-    employeeId = sys.argv[1]
+    employeeId = int(sys.argv[1])
     user_data = get_user_data(employeeId)
     employee_name = user_data["name"]
     todo_list = get_todo_list(employeeId)

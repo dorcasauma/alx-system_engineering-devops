@@ -10,7 +10,6 @@ import requests
 import sys
 
 
-
 def export_to_json(user_id, username, tasks):
     """
     Export tasks data to a JSON file.

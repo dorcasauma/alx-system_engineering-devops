@@ -6,8 +6,9 @@ and exports the data to a JSON file.
 """
 
 import json
-import sys
 import requests
+import sys
+
 
 
 def export_to_json(user_id, username, tasks):
